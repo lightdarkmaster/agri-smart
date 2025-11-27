@@ -1,5 +1,7 @@
+import 'package:agrismart/pages/homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'register_page.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -10,23 +12,23 @@ class LoginPage extends StatelessWidget {
       backgroundColor: Colors.grey[100],
       body: Center(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 30),
+          padding: const EdgeInsets.symmetric(horizontal: 28),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // App Title
+              // Title Section
               Text(
-                "Welcome Back!",
+                "Agri Smart",
                 style: GoogleFonts.poppins(
-                  fontSize: 32,
-                  fontWeight: FontWeight.w600,
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(height: 8),
+              const SizedBox(height: 6),
               Text(
-                "Login to your account.",
+                "TCFM - Agrismart",
                 style: GoogleFonts.poppins(
-                  fontSize: 16,
+                  fontSize: 15,
                   color: Colors.grey[600],
                 ),
               ),
@@ -39,7 +41,6 @@ class LoginPage extends StatelessWidget {
                 icon: Icons.email_outlined,
                 obscure: false,
               ),
-
               const SizedBox(height: 20),
 
               // Password Input
@@ -49,15 +50,15 @@ class LoginPage extends StatelessWidget {
                 obscure: true,
               ),
 
-              const SizedBox(height: 10),
+              const SizedBox(height: 4),
 
-              // Forgot Password
+              // Forgot Password Button
               Align(
                 alignment: Alignment.centerRight,
                 child: TextButton(
                   onPressed: () {},
                   child: Text(
-                    "Forgot password?",
+                    "Forgot Password?",
                     style: GoogleFonts.poppins(
                       color: Colors.blueAccent,
                       fontWeight: FontWeight.w500,
@@ -68,74 +69,77 @@ class LoginPage extends StatelessWidget {
 
               const SizedBox(height: 20),
 
-              // Login Button
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(14),
+              // Login + Register Buttons
+              Column(
+                children: [
+                  // Login Button
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const HomePage(),
+                          ),
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        backgroundColor: Colors.blueAccent,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(14),
+                        ),
+                      ),
+                      child: Text(
+                        "Login",
+                        style: GoogleFonts.poppins(
+                          fontSize: 17,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
                     ),
-                    backgroundColor: Colors.blueAccent,
                   ),
-                  child: Text(
-                    "Login",
-                    style: GoogleFonts.poppins(
-                        fontSize: 18, fontWeight: FontWeight.w600, color: Colors.white),
-                  ),
-                ),
-              ),
 
-              const SizedBox(height: 30),
+                  const SizedBox(height: 15),
 
-              // Divider
-              Row(
-                children: [
-                  Expanded(child: Divider(color: Colors.grey[400])),
-                  const SizedBox(width: 10),
-                  Text("or continue with",
-                      style: GoogleFonts.poppins(color: Colors.grey[600])),
-                  const SizedBox(width: 10),
-                  Expanded(child: Divider(color: Colors.grey[400])),
-                ],
-              ),
-
-              const SizedBox(height: 30),
-
-              // Social Login Row
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  _socialButton("assets/images/google.png"),
-                  const SizedBox(width: 15),
-                  _socialButton("assets/images/facebook.png"),
-                  const SizedBox(width: 15),
-                  _socialButton("assets/images/apple.png"),
-                ],
-              ),
-
-              const SizedBox(height: 40),
-
-              // Register
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text("Don't have an account?",
-                      style: GoogleFonts.poppins()),
-                  TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      "Sign Up",
-                      style: GoogleFonts.poppins(
-                        color: Colors.blueAccent,
-                        fontWeight: FontWeight.w600,
+                  // Register Button
+                  SizedBox(
+                    width: double.infinity,
+                    child: OutlinedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const RegisterPage(),
+                          ),
+                        );
+                      },
+                      style: OutlinedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        side: const BorderSide(
+                          color: Colors.blueAccent,
+                          width: 2,
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(14),
+                        ),
+                      ),
+                      child: Text(
+                        "Register",
+                        style: GoogleFonts.poppins(
+                          fontSize: 17,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.blueAccent,
+                        ),
                       ),
                     ),
                   ),
                 ],
-              )
+              ),
+
+              const SizedBox(height: 30),
             ],
           ),
         ),
@@ -143,7 +147,7 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  // TextField Widget
+  // Modern Text Field
   Widget _buildTextField({
     required String label,
     required IconData icon,
@@ -153,8 +157,8 @@ class LoginPage extends StatelessWidget {
       obscureText: obscure,
       decoration: InputDecoration(
         labelText: label,
-        labelStyle: GoogleFonts.poppins(),
-        prefixIcon: Icon(icon),
+        prefixIcon: Icon(icon, color: Colors.blueAccent),
+        labelStyle: GoogleFonts.poppins(fontSize: 15),
         filled: true,
         fillColor: Colors.white,
         contentPadding: const EdgeInsets.symmetric(vertical: 18),
@@ -163,26 +167,6 @@ class LoginPage extends StatelessWidget {
           borderSide: BorderSide.none,
         ),
       ),
-    );
-  }
-
-  // Social login button
-  Widget _socialButton(String assetPath) {
-    return Container(
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        shape: BoxShape.rectangle,
-        borderRadius: BorderRadius.circular(14),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black12,
-            blurRadius: 6,
-            offset: Offset(0, 3),
-          )
-        ],
-      ),
-      child: Image.asset(assetPath, height: 28),
     );
   }
 }
